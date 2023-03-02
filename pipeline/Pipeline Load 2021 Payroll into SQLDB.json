@@ -1,5 +1,5 @@
 {
-	"name": "Load2021PayrollDataPipeline",
+	"name": "Pipeline Load 2021 Payroll into SQLDB",
 	"properties": {
 		"activities": [
 			{
