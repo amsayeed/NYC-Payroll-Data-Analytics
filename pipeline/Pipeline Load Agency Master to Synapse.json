@@ -24,7 +24,7 @@
 							"referenceName": "AzureDataLakeStorage",
 							"type": "LinkedServiceReference"
 						},
-						"folderPath": "adlsnycpayroll-ahmed-lastintial"
+						"folderPath": "adlsnycpayroll-ahmed-lastintial/dirstaging"
 					},
 					"compute": {
 						"coreCount": 8,
