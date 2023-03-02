@@ -1,5 +1,5 @@
 {
-	"name": "Load2021Data",
+	"name": "Load2021DataToSynapse",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
