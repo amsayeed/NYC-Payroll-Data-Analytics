@@ -1,0 +1,26 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "PayrollSummarySynapse",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~>  PayrollSummarySynapse",
+					"dataset": {
+						"referenceName": "PayrollSummarySynapse",
+						"type": "DatasetReference"
+					}
+				},
+				{
+					"name": "NYC_Payroll_Data_Synapse",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~>  NYC_Payroll_Data_Synapse",
+					"dataset": {
+						"referenceName": "NYC_Payroll_Data_Synapse",
+						"type": "DatasetReference"
+					}
+				}
+			]
+		}
+	}
+}
