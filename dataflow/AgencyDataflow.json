@@ -47,7 +47,8 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          AgencyID = TitleCode",
+				"          AgencyID,",
+				"          AgencyName",
 				"     )) ~> AgencySink"
 			]
 		}
