@@ -21,7 +21,11 @@
 			],
 			"sinks": [
 				{
-					"name": "sink1"
+					"dataset": {
+						"referenceName": "PayrollSummarySynapse",
+						"type": "DatasetReference"
+					},
+					"name": "PayrollSummarySynapseSink"
 				}
 			],
 			"transformations": [
@@ -95,13 +99,31 @@
 				"SynapsePayrollData, HistoricalData union(byName: true)~> union1",
 				"union1 filter(toInteger(FiscalYear) >= $FiscalYear) ~> filter1",
 				"filter1 derive(TotalPaid = RegularGrossPaid + TotalOTPaid+TotalOtherPay) ~> TotalPaid",
-				"TotalPaid aggregate(groupBy(AgencyID,",
+				"TotalPaid aggregate(groupBy(AgencyName,",
 				"          FiscalYear),",
 				"     TotalPaid = sum(TotalPaid)) ~> aggregate1",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          FiscalYear as integer,",
+				"          AgencyName as string,",
+				"          TotalPaid as double",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          FiscalYear,",
+				"          AgencyName,",
+				"          TotalPaid",
+				"     )) ~> PayrollSummarySynapseSink"
 			]
 		}
 	}
