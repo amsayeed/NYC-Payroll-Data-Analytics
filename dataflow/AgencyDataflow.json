@@ -9,19 +9,46 @@
 						"referenceName": "AgencyMaster",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "dsAgencyMaster"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "NYC_Payroll_AGENCY_MD_Synapse",
+						"type": "DatasetReference"
+					},
+					"name": "AgencySink"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          TitleCode as string,",
-				"          TitleDescription as string",
+				"          AgencyID as string,",
+				"          AgencyName as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false) ~> dsAgencyMaster",
+				"dsAgencyMaster sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          AgencyID as string,",
+				"          AgencyName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          AgencyID = TitleCode",
+				"     )) ~> AgencySink"
 			]
 		}
 	}

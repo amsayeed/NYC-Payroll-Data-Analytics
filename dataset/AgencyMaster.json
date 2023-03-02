@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "TitleMaster.csv",
+				"fileName": "AgencyMaster.csv",
 				"folderPath": "dirpayrollfiles",
 				"fileSystem": "adlsnycpayroll-ahmed-lastintial"
 			},
@@ -21,11 +21,11 @@
 		},
 		"schema": [
 			{
-				"name": "TitleCode",
+				"name": "AgencyID",
 				"type": "String"
 			},
 			{
-				"name": "TitleDescription",
+				"name": "AgencyName",
 				"type": "String"
 			}
 		]
